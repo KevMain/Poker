@@ -19,9 +19,6 @@ namespace CompatibleSoftware.Poker.Domain
 
             foreach (var player in _players)
             {
-                var card = _dealer.DealTopCard();
-
-                System.Console.WriteLine("Dealing to: " + player.GetName() + " the card " + card.GetFriendlyName());
                 player.ReceiveCard(_dealer.DealTopCard());
             }
         }
