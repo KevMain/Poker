@@ -40,9 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card.cs" />
-    <Compile Include="Deck.cs" />
+    <Compile Include="Dealer.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="ICard.cs" />
+    <Compile Include="IDealer.cs" />
+    <Compile Include="IPlayer.cs" />
+    <Compile Include="IShuffleMethod.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="StandardDeck.cs" />
+    <Compile Include="IDeck.cs" />
     <Compile Include="Rank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StandardShuffleMethod.cs" />
     <Compile Include="Suit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

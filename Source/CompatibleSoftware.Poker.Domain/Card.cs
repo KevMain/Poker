@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CompatibleSoftware.Poker.Domain
+﻿namespace CompatibleSoftware.Poker.Domain
 {
-    public class Card
+    public class Card : ICard
     {
         private readonly Suit _suit;
         private readonly Rank _rank;
@@ -25,6 +19,11 @@ namespace CompatibleSoftware.Poker.Domain
         public Suit GetSuit()
         {
             return _suit;
+        }
+
+        public string GetFriendlyName()
+        {
+            return _rank + " of " + _suit;
         }
     }
 }
