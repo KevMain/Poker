@@ -6,13 +6,10 @@ namespace CompatibleSoftware.Poker.Domain
 {
     public class StandardDeck : IDeck
     {
-        private readonly IShuffleMethod _shuffleMethod;
-
         private IList<ICard> _cards;
 
-        public StandardDeck(IShuffleMethod shuffleMethod)
+        public StandardDeck()
         {
-            _shuffleMethod = shuffleMethod;
             _cards = CreateDeck();
         }
 
@@ -25,17 +22,18 @@ namespace CompatibleSoftware.Poker.Domain
             return cards;
         }
 
-        public void Shuffle()
-        {
-            _cards = _shuffleMethod.Shuffle(_cards);
-        }
-
         public IList<ICard> GetCards()
         {
             return _cards;
         }
 
-        public ICard TakeTopCard()
+        //TODO: Dislike this but need it to support sorting - need a better way to do it.
+        public void SetCards(IList<ICard> cards)
+        {
+            _cards = cards;
+        }
+
+        public ICard TakeCardFromTop()
         {
             var card = _cards.FirstOrDefault();
 
@@ -44,9 +42,9 @@ namespace CompatibleSoftware.Poker.Domain
             return card;
         }
 
-        public void BurnCard()
+        public void PutCardAtBottom(ICard card)
         {
-            _cards.Add(TakeTopCard());
+            _cards.Add(card);
         }
     }
 }

@@ -4,12 +4,12 @@ namespace CompatibleSoftware.Poker.Domain
 {
     public interface IDeck
     {
-        void Shuffle();
-
         IList<ICard> GetCards();
 
-        void BurnCard();
+        void SetCards(IList<ICard> cards);
 
-        ICard TakeTopCard();
+        ICard TakeCardFromTop();
+
+        void PutCardAtBottom(ICard card);
     }
 }

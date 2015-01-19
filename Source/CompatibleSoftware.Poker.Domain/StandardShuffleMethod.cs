@@ -1,14 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CompatibleSoftware.Poker.Domain
 {
+    /// <summary>
+    /// This is the default shuffle method
+    /// Provides a random distribution of cards
+    /// </summary>
     public class StandardShuffleMethod : IShuffleMethod
     {
-        public IList<ICard> Shuffle(IList<ICard> cards)
+        /// <summary>
+        /// Performs the actual shuffle
+        /// </summary>
+        /// <param name="deck">The deck to shuffle</param>
+        public void Shuffle(IDeck deck)
         {
-            return cards.OrderBy(c => Guid.NewGuid()).ToList();
+            //Method: Generate and sort by a unique Guid for each card
+            //See http://blog.codinghorror.com/shuffling/ 
+            deck.SetCards(deck.GetCards().OrderBy(c => Guid.NewGuid()).ToList());
         }
     }
 }

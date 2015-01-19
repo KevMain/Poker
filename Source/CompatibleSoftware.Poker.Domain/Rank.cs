@@ -1,5 +1,10 @@
 ﻿namespace CompatibleSoftware.Poker.Domain
 {
+    /// <summary>
+    /// An enum of card ranks
+    /// Each Rank including picture cards is give a numeric rank for easier reference
+    /// Ace is specified as Low but also could be High which the logic will take care of
+    /// </summary>
     public enum Rank
     {
         Ace = 1,

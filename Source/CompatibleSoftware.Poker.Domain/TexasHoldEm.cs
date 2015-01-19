@@ -10,7 +10,7 @@ namespace CompatibleSoftware.Poker.Domain
 
         public TexasHoldEm(IList<IPlayer> players)
         {
-            _dealer = new Dealer(new StandardDeck(new StandardShuffleMethod()));
+            _dealer = new Dealer(new StandardDeck(), new StandardShuffleMethod());
             _players = players;
             _communityCards = new CommunityCards();
         }
