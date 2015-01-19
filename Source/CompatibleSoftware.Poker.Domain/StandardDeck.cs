@@ -43,5 +43,10 @@ namespace CompatibleSoftware.Poker.Domain
 
             return card;
         }
+
+        public void BurnCard()
+        {
+            _cards.Add(TakeTopCard());
+        }
     }
 }

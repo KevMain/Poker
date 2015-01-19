@@ -23,5 +23,10 @@ namespace CompatibleSoftware.Poker.Domain
         {
             _pocketCards.Add(card);
         }
+
+        public IList<ICard> ShowCards()
+        {
+            return _pocketCards;
+        }
     }
 }

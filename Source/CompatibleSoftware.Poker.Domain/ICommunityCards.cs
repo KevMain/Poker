@@ -2,14 +2,10 @@
 
 namespace CompatibleSoftware.Poker.Domain
 {
-    public interface IDeck
+    public interface ICommunityCards
     {
-        void Shuffle();
+        void AddCard(ICard card);
 
         IList<ICard> GetCards();
-
-        void BurnCard();
-
-        ICard TakeTopCard();
     }
 }

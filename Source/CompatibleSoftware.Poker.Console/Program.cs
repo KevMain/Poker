@@ -7,15 +7,11 @@ namespace CompatibleSoftware.Poker.Console
     {
         static void Main(string[] args)
         {
-            var game = new Game(
-                new Dealer(
-                    new StandardDeck(
-                        new StandardShuffleMethod()
-                    )
-                ), 
-                GeneratePlayers(2));
+            var game = new TexasHoldEm(GeneratePlayers(2));
             
             game.Play();
+
+            game.ShowGameState();
 
             System.Console.WriteLine("Press enter to close...");
             System.Console.ReadLine();

@@ -16,6 +16,8 @@
 
         public ICard DealTopCard()
         {
+            _deck.BurnCard();
+
             return _deck.TakeTopCard();
         }
     }
