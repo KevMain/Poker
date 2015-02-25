@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CompatibleSoftware.Poker.Domain;
+﻿using CompatibleSoftware.Poker.Domain.Tables;
 
 namespace CompatibleSoftware.Poker.Console
 {
@@ -7,26 +6,8 @@ namespace CompatibleSoftware.Poker.Console
     {
         static void Main(string[] args)
         {
-            var game = new TexasHoldEm(GeneratePlayers(2));
-            
-            game.PlayGame();
-
-            System.Console.WriteLine(game.ShowGameState());
-
-            System.Console.WriteLine("Press enter to close...");
-            System.Console.ReadLine();
-        }
-
-        private static IList<IPlayer> GeneratePlayers(int numberOfPlayers)
-        {
-            var players = new List<IPlayer>();
-
-            for (var i = 1; i <= numberOfPlayers; i++)
-            {
-                players.Add(new Player("Player" + i));
-            }
-
-            return players;
+            var tableRules = new TableRules {MaxNumberOfSeats = 2};
+            var table = new PokerTable(tableRules);
         }
     }
 }

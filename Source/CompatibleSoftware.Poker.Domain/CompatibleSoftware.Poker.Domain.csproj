@@ -45,6 +45,11 @@
     <Compile Include="DeckBase.cs" />
     <Compile Include="GameBase.cs" />
     <Compile Include="IGame.cs" />
+    <Compile Include="IPokerGame.cs" />
+    <Compile Include="Tables\IPokerTable.cs" />
+    <Compile Include="ISeat.cs" />
+    <Compile Include="Tables\PokerTable.cs" />
+    <Compile Include="Tables\TableRules.cs" />
     <Compile Include="TexasHoldEm.cs" />
     <Compile Include="ICard.cs" />
     <Compile Include="ICommunityCards.cs" />
