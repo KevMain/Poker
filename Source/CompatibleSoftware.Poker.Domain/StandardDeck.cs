@@ -4,15 +4,24 @@ using System.Linq;
 
 namespace CompatibleSoftware.Poker.Domain
 {
-    public class StandardDeck : IDeck
+    /// <summary>
+    /// Implementation of a standard deck of cards
+    /// </summary>
+    public class StandardDeck : DeckBase
     {
-        private IList<ICard> _cards;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StandardDeck"/>
+        /// </summary>
         public StandardDeck()
         {
-            _cards = CreateDeck();
+            SetCards(CreateDeck());
         }
 
+        /// <summary>
+        /// Creates an internal list of cards of each Suit/Rank combination
+        /// In a standard game this is a deck of 52 cards
+        /// </summary>
+        /// <returns>A list of generated cards</returns>
         private IList<ICard> CreateDeck()
         {
             var cards = new List<ICard>();
@@ -20,31 +29,6 @@ namespace CompatibleSoftware.Poker.Domain
             cards.AddRange(from suit in (Suit[]) Enum.GetValues(typeof (Suit)) from rank in (Rank[]) Enum.GetValues(typeof (Rank)) select new Card(suit, rank));
 
             return cards;
-        }
-
-        public IList<ICard> GetCards()
-        {
-            return _cards;
-        }
-
-        //TODO: Dislike this but need it to support sorting - need a better way to do it.
-        public void SetCards(IList<ICard> cards)
-        {
-            _cards = cards;
-        }
-
-        public ICard TakeCardFromTop()
-        {
-            var card = _cards.FirstOrDefault();
-
-            _cards.Remove(card);
-
-            return card;
-        }
-
-        public void PutCardAtBottom(ICard card)
-        {
-            _cards.Add(card);
         }
     }
 }

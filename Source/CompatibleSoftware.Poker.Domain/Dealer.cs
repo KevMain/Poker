@@ -15,7 +15,6 @@
         /// The method the dealer will use for shuffling the cards
         /// </summary>
         private readonly IShuffleMethod _shuffleMethod;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Dealer"/> class with
         /// the supplied <see cref="IDeck"/> and <see cref="IShuffleMethod"/>

@@ -1,59 +1,106 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace CompatibleSoftware.Poker.Domain
 {
-    public class TexasHoldEm : IGame
+    /// <summary>
+    /// Logic for the game of TexasHoldEm
+    /// </summary>
+    public class TexasHoldEm : GameBase, IGame
     {
-        private readonly IDealer _dealer;
-        private readonly IList<IPlayer> _players;
-        private readonly ICommunityCards _communityCards;
+        /// <summary>
+        /// Defines the amount of cards each user will be dealt to begin the game
+        /// </summary>
+        private const int PocketCards = 2;
 
+        /// <summary>
+        /// Defines the amount of cards in the flop
+        /// </summary>
+        private const int FlopCards = 3;
+       
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TexasHoldEm"/> class with
+        /// the specified list of players
+        /// </summary>
+        /// <param name="players">A list of players to play the game</param>
         public TexasHoldEm(IList<IPlayer> players)
+            : base(players, PocketCards)
         {
-            _dealer = new Dealer(new StandardDeck(), new StandardShuffleMethod());
-            _players = players;
-            _communityCards = new CommunityCards();
+            Dealer = new Dealer(new StandardDeck(), new StandardShuffleMethod());
         }
 
-        public void Play()
+        /// <summary>
+        /// Starts a new game 
+        /// </summary>
+        public void PlayGame()
         {
-            _dealer.Shuffle();
+            Dealer.Shuffle();
 
-            for (var i = 1; i <= 2; i++)
-            {
-                foreach (var player in _players)
-                {
-                    player.ReceiveCard(_dealer.DealTopCard());
-                }
-            }
+            DealPocketCards();
 
-            for (int i = 1; i <= 3; i++)
-            {
-                _communityCards.AddCard(_dealer.DealTopCard());
-            }
+            DealFlop();
 
-            _communityCards.AddCard(_dealer.DealTopCard());
+            DealTurn();
 
-            _communityCards.AddCard(_dealer.DealTopCard());
+            DealRiver();
         }
 
-        public void ShowGameState()
+        /// <summary>
+        /// Deals the flop
+        /// </summary>
+        private void DealFlop()
         {
-            foreach (var player in _players)
+            for (var i = 0; i < FlopCards; i++) 
             {
-                System.Console.WriteLine(player.GetName() + " has: ");
+                DealCommunityCard();
+            }
+        }
+
+        /// <summary>
+        /// Deal the turn card
+        /// </summary>
+        private void DealTurn()
+        {
+            DealCommunityCard();
+        }
+
+        /// <summary>
+        /// Deal the river card
+        /// </summary>
+        private void DealRiver()
+        {
+            DealCommunityCard();
+        }
+
+        /// <summary>
+        /// Outputs the current state of the game
+        /// </summary>
+        /// <returns>A string of current state</returns>
+        public string ShowGameState()
+        {
+            var gameState = new StringBuilder();
+
+            foreach (var player in Players)
+            {
+                gameState.AppendLine("----------------------------------");
+
+                gameState.AppendLine("Player: " + player.GetName());
+
                 foreach (var card in player.ShowCards())
                 {
-                    System.Console.WriteLine(card.GetFriendlyName());
+                    gameState.AppendLine(card.GetFriendlyName());
                 }
             }
 
-            System.Console.WriteLine("Community Cards are: ");
-            foreach (var card in _communityCards.GetCards())
+            gameState.AppendLine("----------------------------------");
+            gameState.AppendLine("Community Cards");
+                
+            foreach (var card in CommunityCards.GetCards())
             {
-                System.Console.WriteLine(card.GetFriendlyName());
+                gameState.AppendLine(card.GetFriendlyName());
             }
-        }
 
+            return gameState.ToString();
+        }
     }
 }

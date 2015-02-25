@@ -2,8 +2,8 @@ namespace CompatibleSoftware.Poker.Domain
 {
     public interface IGame
     {
-        void Play();
+        void PlayGame();
 
-        void ShowGameState();
+        string ShowGameState();
     }
 }

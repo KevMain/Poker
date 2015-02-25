@@ -9,9 +9,9 @@ namespace CompatibleSoftware.Poker.Console
         {
             var game = new TexasHoldEm(GeneratePlayers(2));
             
-            game.Play();
+            game.PlayGame();
 
-            game.ShowGameState();
+            System.Console.WriteLine(game.ShowGameState());
 
             System.Console.WriteLine("Press enter to close...");
             System.Console.ReadLine();
