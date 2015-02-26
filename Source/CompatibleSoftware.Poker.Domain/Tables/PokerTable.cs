@@ -51,6 +51,17 @@ namespace CompatibleSoftware.Poker.Domain.Tables
             return true;
         }
 
+        public string PlayHand()
+        {
+            //TODO: Refactor this
+
+            var game = new TexasHoldEm(GetCurrentPlayers());
+
+            game.PlayGame();
+
+            return game.ShowGameState();
+        }
+
         /// <summary>
         /// Finds the first seat at the table not taken by any player
         /// </summary>

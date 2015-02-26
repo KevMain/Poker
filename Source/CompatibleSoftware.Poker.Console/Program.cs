@@ -15,6 +15,8 @@ namespace CompatibleSoftware.Poker.Console
             var player2 = new Player("Player 2");
             table.Join(player2);
 
+            System.Console.WriteLine(table.PlayHand());
+
             table.Leave(player1);
             table.Leave(player2);
 

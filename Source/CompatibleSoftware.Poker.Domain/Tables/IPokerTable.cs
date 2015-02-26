@@ -5,5 +5,7 @@
         bool Join(IPlayer player);
 
         void Leave(IPlayer player);
+
+        string PlayHand();
     }
 }
