@@ -47,7 +47,9 @@
     <Compile Include="IGame.cs" />
     <Compile Include="IPokerGame.cs" />
     <Compile Include="Tables\IPokerTable.cs" />
+    <Compile Include="Tables\ISeat.cs" />
     <Compile Include="Tables\PokerTable.cs" />
+    <Compile Include="Tables\Seat.cs" />
     <Compile Include="Tables\TableRules.cs" />
     <Compile Include="TexasHoldEm.cs" />
     <Compile Include="ICard.cs" />

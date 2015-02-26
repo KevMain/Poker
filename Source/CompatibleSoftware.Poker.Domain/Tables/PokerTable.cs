@@ -14,9 +14,9 @@ namespace CompatibleSoftware.Poker.Domain.Tables
         private readonly TableRules _tableRules;
 
         /// <summary>
-        /// The list of players at this table
+        /// The seats at the table
         /// </summary>
-        private readonly IList<IPlayer> _players;
+        private readonly IList<ISeat> _seats;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PokerTable"/> 
@@ -26,7 +26,11 @@ namespace CompatibleSoftware.Poker.Domain.Tables
         public PokerTable(TableRules tableRules)
         {
             _tableRules = tableRules;
-            _players = new List<IPlayer>();
+            
+            _seats = new List<ISeat>();
+
+            for (var i = 1; i <= _tableRules.MaxNumberOfPlayers; i++)
+                _seats.Add(new Seat(i));
         }
 
         /// <summary>
@@ -38,13 +42,55 @@ namespace CompatibleSoftware.Poker.Domain.Tables
         {
             if (IsMaximumNumberOfPlayers())
                 return false;
-            
+
             if (IsPlayerAtTable(player))
                 return false;
-            
-            _players.Add(player);
+
+            AssignPlayerToSeat(player, GetFirstEmptySeat());
 
             return true;
+        }
+
+        /// <summary>
+        /// Finds the first seat at the table not taken by any player
+        /// </summary>
+        /// <returns>The first available seat</returns>
+        private ISeat GetFirstEmptySeat()
+        {
+            return _seats.OrderBy(s => s.GetSeatNumber()).FirstOrDefault(seat => seat.IsSeatEmpty());
+        }
+
+        /// <summary>
+        /// Assigns the specified player to the seat
+        /// </summary>
+        /// <param name="player">The player to assign</param>
+        /// <param name="seat">The seat to assign them to</param>
+        private void AssignPlayerToSeat(IPlayer player, ISeat seat)
+        {
+            seat.SitDown(player);
+            player.SetSeatNumber(seat.GetSeatNumber());
+        }
+
+        /// <summary>
+        /// Removes the player from the table
+        /// </summary>
+        /// <param name="player">The player to remove</param>
+        public void Leave(IPlayer player)
+        {
+            if (IsPlayerAtTable(player))
+            {
+                _seats[player.GetSeatNumber()].Vacate();
+                player.SetSeatNumber(0);
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of all current players
+        /// </summary>
+        /// <returns>A list of all current players</returns>
+        private List<IPlayer> GetCurrentPlayers()
+        {
+            return _seats.Where(s => !s.IsSeatEmpty()).Select(s => s.GetPlayer()).ToList();
         }
 
         /// <summary>
@@ -53,7 +99,7 @@ namespace CompatibleSoftware.Poker.Domain.Tables
         /// <returns>If the table is full or not</returns>
         private bool IsMaximumNumberOfPlayers()
         {
-            return _players.Count >= _tableRules.MaxNumberOfPlayers;
+            return GetCurrentPlayers().Count >= _tableRules.MaxNumberOfPlayers;
         }
 
         /// <summary>
@@ -63,7 +109,7 @@ namespace CompatibleSoftware.Poker.Domain.Tables
         /// <returns>If they are at the table or not</returns>
         private bool IsPlayerAtTable(IPlayer playerToFind)
         {
-            return _players.Any(player => player.GetName() == playerToFind.GetName());
+            return GetCurrentPlayers().Any(player => player.GetName() == playerToFind.GetName());
         }
     }
 }

@@ -9,5 +9,9 @@ namespace CompatibleSoftware.Poker.Domain
         void ReceiveCard(ICard card);
 
         IList<ICard> ShowCards();
+
+        int GetSeatNumber();
+
+        void SetSeatNumber(int seatNumber);
     }
 }
