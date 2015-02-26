@@ -13,6 +13,11 @@ namespace CompatibleSoftware.Poker.Domain
         private readonly string _name;
 
         /// <summary>
+        /// The seat that this player is sat at
+        /// </summary>
+        private int _seatNumber;
+
+        /// <summary>
         /// The cards in this players hand
         /// </summary>
         private readonly IList<ICard> _pocketCards;
@@ -24,6 +29,7 @@ namespace CompatibleSoftware.Poker.Domain
         public Player(string name)
         {
             _name = name;
+            _seatNumber = 0;
             _pocketCards = new List<ICard>();
         }
 
@@ -52,6 +58,24 @@ namespace CompatibleSoftware.Poker.Domain
         public IList<ICard> ShowCards()
         {
             return _pocketCards;
+        }
+
+        /// <summary>
+        /// Returns the players seat number
+        /// </summary>
+        /// <returns>The seat the player is sat at or 0 is not sat down</returns>
+        public int GetSeatNumber()
+        {
+            return _seatNumber;
+        }
+
+        /// <summary>
+        /// Set the seat the player is sat at
+        /// </summary>
+        /// <param name="seatNumber">The number of the seat they are sat at</param>
+        public void SetSeatNumber(int seatNumber)
+        {
+            _seatNumber = seatNumber;
         }
     }
 }
