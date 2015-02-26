@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace CompatibleSoftware.Poker.Domain.Tables
+﻿namespace CompatibleSoftware.Poker.Domain.Tables
 {
     public interface IPokerTable
     {
+        bool Join(IPlayer player);
     }
 }
