@@ -4,13 +4,16 @@ using CompatibleSoftware.Poker.Ports.Repositories;
 
 namespace CompatibleSoftware.Poker.DAL.Adapters
 {
-    /// <summary>
-    /// In memory repository to be used until storage strategy defined
-    /// </summary>
     public class TableRepository : ITableRepository
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly GenericRepository<Table> _internalRepository;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TableRepository()
         {
             _internalRepository = new GenericRepository<Table>();

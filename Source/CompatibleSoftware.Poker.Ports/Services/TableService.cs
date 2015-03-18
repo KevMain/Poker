@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CompatibleSoftware.Poker.Domain.Models;
 using CompatibleSoftware.Poker.Ports.Command;
 using CompatibleSoftware.Poker.Ports.Repositories;
@@ -48,6 +49,16 @@ namespace CompatibleSoftware.Poker.Ports.Services
             };
 
             return _tableRepository.Create(table);
+        }
+
+        /// <summary>
+        /// Gets a list of all players sat at the specific table
+        /// </summary>
+        /// <param name="tableId">The table Id</param>
+        /// <returns>A list of players at the table</returns>
+        public IList<Player> GetTablePlayers(int tableId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

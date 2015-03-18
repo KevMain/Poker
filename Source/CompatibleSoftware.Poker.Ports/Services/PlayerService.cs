@@ -34,13 +34,16 @@ namespace CompatibleSoftware.Poker.Ports.Services
             return _playerRepository.GetAll();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="createPlayerCommand"></param>
+        /// <returns></returns>
         public Player CreatePlayer(CreatePlayerCommand createPlayerCommand)
         {
-            var player = new Player {Id = 3, Name = createPlayerCommand.Name};
+            var player = new Player {Name = createPlayerCommand.Name};
 
-            _playerRepository.Create(player);
-
-            return player;
+            return _playerRepository.Create(player);
         }
     }
 }

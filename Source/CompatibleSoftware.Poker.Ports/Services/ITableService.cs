@@ -9,5 +9,7 @@ namespace CompatibleSoftware.Poker.Ports.Services
         IList<Table> GetAllActiveTables();
 
         Table CreateTable(CreateTableCommand createTableCommand);
+
+        IList<Player> GetTablePlayers(int tableId);
     }
 }

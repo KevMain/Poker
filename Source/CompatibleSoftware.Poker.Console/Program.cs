@@ -6,14 +6,15 @@ namespace CompatibleSoftware.Poker.Console
     {
         static void Main(string[] args)
         {
-            var table = CreateTable();
+            var table = CreateTable("Table 1", 2, 4);
+
+            var player1 = CreatePlayer("Player 1");
+
+            var player2 = CreatePlayer("Player 2");
 
             System.Console.WriteLine("Table Id is " + table.Id);
-
-            //var player1 = CreatePlayer("Player 1");
-
-            //var player2 = CreatePlayer("Player 2");
-            
+            System.Console.WriteLine("Player1 Id is " + player1.Id);
+            System.Console.WriteLine("Player2 Id is " + player2.Id);
             
             //table.Join(player1);
             //table.Join(player2);
@@ -29,16 +30,16 @@ namespace CompatibleSoftware.Poker.Console
 
         private static Player CreatePlayer(string playerName)
         {
-            var player = new Player { Id = 3, Name = playerName };
+            var player = new Player {Name = playerName};
 
             var task = ApiCaller<Player>.PostNew("players", player);
 
             return task.Result;
         }
 
-        private static Table CreateTable()
+        private static Table CreateTable(string tableName, int minNumSeats, int maxNumSeats)
         {
-            var table = new Table{Name = "Table 1", MinNumberOfSeats = 2, MaxNumberOfSeats = 6};
+            var table = new Table { Name = tableName, MinNumberOfSeats = minNumSeats, MaxNumberOfSeats = maxNumSeats };
 
             var task = ApiCaller<Table>.PostNew("tables", table);
 

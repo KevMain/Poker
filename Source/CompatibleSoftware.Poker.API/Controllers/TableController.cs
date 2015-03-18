@@ -74,5 +74,25 @@ namespace CompatibleSoftware.Poker.API.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        /// <summary>
+        /// Gets a list of players at the table
+        /// </summary>
+        /// <returns>A list of players</returns>
+        [Route("tables/{tableId}/players")]
+        [HttpGet]
+        public HttpResponseMessage GetPlayersAtTable(int tableId)
+        {
+            try
+            {
+                var players = _tableService.GetTablePlayers(tableId);
+
+                return Request.CreateResponse(HttpStatusCode.OK, players);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }
