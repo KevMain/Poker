@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using CompatibleSoftware.Poker.Domain.Tables;
+using CompatibleSoftware.Poker.Domain.Models;
+using CompatibleSoftware.Poker.Ports.Command;
 using CompatibleSoftware.Poker.Ports.Repositories;
 
 namespace CompatibleSoftware.Poker.Ports.Services
@@ -28,9 +29,25 @@ namespace CompatibleSoftware.Poker.Ports.Services
         /// Get a list of all currently active tables in the repository
         /// </summary>
         /// <returns>A list of Poker Tables</returns>
-        public IList<IPokerTable> GetAllActiveTables()
+        public IList<Table> GetAllActiveTables()
         {
             return _tableRepository.GetAll();
+        }
+
+        /// <summary>
+        /// Creates a new table
+        /// </summary>
+        /// <returns>The newly created table</returns>
+        public Table CreateTable(CreateTableCommand createTableCommand)
+        {
+            var table = new Table
+            {
+                Name = createTableCommand.Name,
+                MinNumberOfSeats = createTableCommand.MinNumberOfSeats,
+                MaxNumberOfSeats = createTableCommand.MaxNumberOfSeats
+            };
+
+            return _tableRepository.Create(table);
         }
     }
 }

@@ -8,46 +8,44 @@ using CompatibleSoftware.Poker.Ports.Services;
 
 namespace CompatibleSoftware.Poker.API.Controllers
 {
-    /// <summary>
-    /// Controller for dealing with poker tables
-    /// </summary>
-    public class TableController : ApiController
+    public class PlayerController : ApiController
     {
         /// <summary>
         /// The injected table service to delegate work to
         /// </summary>
-        private readonly ITableService _tableService;
+        private readonly IPlayerService _playerService;
 
         /// <summary>
         /// Using poor mans DI for now but will be replaced at a later date
         /// </summary>
-        public TableController()
-            : this(new TableService(new TableRepository()))
+        public PlayerController()
+            : this(new PlayerService(new PlayerRepository()))
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableController"/> 
+        /// Initializes a new instance of the <see cref="PlayerController"/> 
         /// and takes in the service instance to use
         /// </summary>
-        /// <param name="tableService">The service that will be used for doing the real work</param>
-        public TableController(ITableService tableService)
+        /// <param name="playerService">The player service which will handle all the real work</param>
+        public PlayerController(IPlayerService playerService)
         {
-            _tableService = tableService;
+            _playerService = playerService;
         }
 
         /// <summary>
-        /// Get a list of all currently active Poker Tables
+        /// Get a list of all currently registered players
         /// </summary>
-        /// <returns>A list of Poker Tables</returns>
-        [Route("tables")]
+        /// <returns>A list of players</returns>
+        [Route("players")]
+        [HttpGet]
         public HttpResponseMessage Get()
         {
             try
             {
-                var tables = _tableService.GetAllActiveTables();
+                var players = _playerService.GetAllCurrentPlayers();
 
-                return Request.CreateResponse(HttpStatusCode.OK, tables);
+                return Request.CreateResponse(HttpStatusCode.OK, players);
             }
             catch (Exception ex)
             {
@@ -56,18 +54,18 @@ namespace CompatibleSoftware.Poker.API.Controllers
         }
 
         /// <summary>
-        /// Creates a new table
+        /// Creates a new player
         /// </summary>
-        /// <returns>The newly created table</returns>
-        [Route("tables")]
+        /// <returns>The newly created player</returns>
+        [Route("players")]
         [HttpPost]
-        public HttpResponseMessage Create(CreateTableCommand createTableCommand)
+        public HttpResponseMessage Create(CreatePlayerCommand createPlayerCommand)
         {
             try
             {
-                var table = _tableService.CreateTable(createTableCommand);
+                var player = _playerService.CreatePlayer(createPlayerCommand);
 
-                return Request.CreateResponse(HttpStatusCode.Created, table);
+                return Request.CreateResponse(HttpStatusCode.Created, player);
             }
             catch (Exception ex)
             {

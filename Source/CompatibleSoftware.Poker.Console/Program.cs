@@ -1,5 +1,4 @@
-﻿using CompatibleSoftware.Poker.Domain;
-using CompatibleSoftware.Poker.Domain.Tables;
+﻿using CompatibleSoftware.Poker.Domain.Models;
 
 namespace CompatibleSoftware.Poker.Console
 {
@@ -7,21 +6,43 @@ namespace CompatibleSoftware.Poker.Console
     {
         static void Main(string[] args)
         {
-            var table = new PokerTable(new TableRules {MinNumberOfPlayers = 2, MaxNumberOfPlayers = 4});
+            var table = CreateTable();
 
-            var player1 = new Player("Player 1");
-            table.Join(player1);
+            System.Console.WriteLine("Table Id is " + table.Id);
 
-            var player2 = new Player("Player 2");
-            table.Join(player2);
+            //var player1 = CreatePlayer("Player 1");
 
-            System.Console.WriteLine(table.PlayHand());
+            //var player2 = CreatePlayer("Player 2");
+            
+            
+            //table.Join(player1);
+            //table.Join(player2);
 
-            table.Leave(player1);
-            table.Leave(player2);
+            //System.Console.WriteLine(table.PlayHand());
+
+            //table.Leave(player1);
+            //table.Leave(player2);
 
             System.Console.WriteLine("Press enter to close...");
             System.Console.ReadLine();
+        }
+
+        private static Player CreatePlayer(string playerName)
+        {
+            var player = new Player { Id = 3, Name = playerName };
+
+            var task = ApiCaller<Player>.PostNew("players", player);
+
+            return task.Result;
+        }
+
+        private static Table CreateTable()
+        {
+            var table = new Table{Name = "Table 1", MinNumberOfSeats = 2, MaxNumberOfSeats = 6};
+
+            var task = ApiCaller<Table>.PostNew("tables", table);
+
+            return task.Result;
         }
     }
 }

@@ -48,6 +48,11 @@
     <Compile Include="GameBase.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="IPokerGame.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\IPrimaryKeyEntity.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Tables\IPokerTable.cs" />
     <Compile Include="Tables\ISeat.cs" />
     <Compile Include="Tables\PokerTable.cs" />
