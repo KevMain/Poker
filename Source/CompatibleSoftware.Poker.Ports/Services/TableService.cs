@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CompatibleSoftware.Poker.Domain.Models;
 using CompatibleSoftware.Poker.Ports.Command;
 using CompatibleSoftware.Poker.Ports.Repositories;
+using Player = CompatibleSoftware.Poker.Domain.Models.Player;
 
 namespace CompatibleSoftware.Poker.Ports.Services
 {
@@ -17,13 +18,20 @@ namespace CompatibleSoftware.Poker.Ports.Services
         private readonly ITableRepository _tableRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableService"/> 
-        /// with the specified repository
+        /// An injected reference to the repo that deals with join requests
         /// </summary>
-        /// <param name="tableRepository">The repository to use</param>
-        public TableService(ITableRepository tableRepository)
+        private readonly IJoinRequestRepository _joinRequestRepository;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TableService"/> 
+        /// with the specified repositories
+        /// </summary>
+        /// <param name="tableRepository">The table repository to use</param>
+        /// <param name="joinRequestRepository">The join request repo to use</param>
+        public TableService(ITableRepository tableRepository, IJoinRequestRepository joinRequestRepository)
         {
             _tableRepository = tableRepository;
+            _joinRequestRepository = joinRequestRepository;
         }
 
         /// <summary>
@@ -52,10 +60,22 @@ namespace CompatibleSoftware.Poker.Ports.Services
         }
 
         /// <summary>
-        /// Gets a list of all players sat at the specific table
+        /// Creates a request to join a table
         /// </summary>
-        /// <param name="tableId">The table Id</param>
-        /// <returns>A list of players at the table</returns>
+        /// <param name="joinTableCommand">The join command object to handle</param>
+        /// <returns>A new join request</returns>
+        public JoinRequest JoinTable(JoinTableCommand joinTableCommand)
+        {
+            var joinRequest = new JoinRequest
+            {
+                PlayerId = joinTableCommand.PlayerId,
+                TableId = joinTableCommand.TableId,
+                RequestStatus = JoinStatus.InProgress
+            };
+
+            return _joinRequestRepository.Create(joinRequest);
+        }
+
         public IList<Player> GetTablePlayers(int tableId)
         {
             throw new NotImplementedException();

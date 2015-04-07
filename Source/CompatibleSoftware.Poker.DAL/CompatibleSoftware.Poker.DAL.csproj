@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\BaseRepository.cs" />
     <Compile Include="Adapters\GenericRepository.cs" />
     <Compile Include="Adapters\PlayerRepository.cs" />
+    <Compile Include="Adapters\JoinRequestRepository.cs" />
     <Compile Include="Adapters\TableRepository.cs" />
     <Compile Include="Context\PokerContext.cs" />
     <Compile Include="Initializer\DatabaseInitializer.cs" />

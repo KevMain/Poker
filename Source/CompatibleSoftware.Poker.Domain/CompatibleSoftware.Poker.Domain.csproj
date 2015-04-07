@@ -55,6 +55,7 @@
     <Compile Include="Models\Table.cs" />
     <Compile Include="Tables\IPokerTable.cs" />
     <Compile Include="Tables\ISeat.cs" />
+    <Compile Include="Models\JoinRequest.cs" />
     <Compile Include="Tables\PokerTable.cs" />
     <Compile Include="Tables\Seat.cs" />
     <Compile Include="Tables\TableRules.cs" />

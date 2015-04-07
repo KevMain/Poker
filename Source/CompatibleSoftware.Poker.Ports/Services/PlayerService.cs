@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CompatibleSoftware.Poker.Ports.Repositories;
 using CompatibleSoftware.Poker.Domain.Models;
 using CompatibleSoftware.Poker.Ports.Command;
@@ -44,6 +45,17 @@ namespace CompatibleSoftware.Poker.Ports.Services
             var player = new Player {Name = createPlayerCommand.Name};
 
             return _playerRepository.Create(player);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
+        public Player Get(int playerId)
+        {
+            throw new NotImplementedException();
+           // return _playerRepository.
         }
     }
 }

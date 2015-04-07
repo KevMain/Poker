@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\JoinTableCommand.cs" />
     <Compile Include="Command\CreateTableCommand.cs" />
     <Compile Include="Command\CreatePlayerCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IPlayerRepository.cs" />
+    <Compile Include="Repositories\IJoinRequestRepository.cs" />
     <Compile Include="Repositories\ITableRepository.cs" />
     <Compile Include="Services\IPlayerService.cs" />
     <Compile Include="Services\ITableService.cs" />

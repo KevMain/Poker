@@ -8,6 +8,7 @@ namespace CompatibleSoftware.Poker.DAL.Context
     {
         public DbSet<Table> Tables { get; set; }
         public DbSet<Player> Players { get; set; }
+        public DbSet<JoinRequest> JoinRequests { get; set; }
 
         public PokerContext()
             : base("PokerContext")
@@ -19,6 +20,7 @@ namespace CompatibleSoftware.Poker.DAL.Context
         {
             modelBuilder.Entity<Table>().HasKey(t => t.Id);
             modelBuilder.Entity<Player>().HasKey(t => t.Id);
+            modelBuilder.Entity<JoinRequest>().HasKey(t => t.Id);
         }
     }
 }

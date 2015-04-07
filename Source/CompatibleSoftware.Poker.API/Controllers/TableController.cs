@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CompatibleSoftware.Poker.DAL.Adapters;
 using CompatibleSoftware.Poker.Ports.Command;
+using CompatibleSoftware.Poker.Ports.Repositories;
 using CompatibleSoftware.Poker.Ports.Services;
 
 namespace CompatibleSoftware.Poker.API.Controllers
@@ -22,7 +23,7 @@ namespace CompatibleSoftware.Poker.API.Controllers
         /// Using poor mans DI for now but will be replaced at a later date
         /// </summary>
         public TableController()
-            : this(new TableService(new TableRepository()))
+            : this(new TableService(new TableRepository(), new JoinRequestRepository()))
         {
         }
 
@@ -88,6 +89,27 @@ namespace CompatibleSoftware.Poker.API.Controllers
                 var players = _tableService.GetTablePlayers(tableId);
 
                 return Request.CreateResponse(HttpStatusCode.OK, players);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Controller action that is fired when a player asks to join a table
+        /// </summary>
+        /// <param name="joinTableCommand">The command to execute</param>
+        /// <returns>A newly created request resource</returns>
+        [Route("joinrequest")]
+        [HttpPost]
+        public HttpResponseMessage PlayerRequestToJoinTable(JoinTableCommand joinTableCommand)
+        {
+            try
+            {
+                var joinRequest = _tableService.JoinTable(joinTableCommand);
+
+                return Request.CreateResponse(HttpStatusCode.OK, joinRequest);
             }
             catch (Exception ex)
             {

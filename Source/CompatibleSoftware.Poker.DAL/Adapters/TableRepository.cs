@@ -19,6 +19,11 @@ namespace CompatibleSoftware.Poker.DAL.Adapters
             _internalRepository = new GenericRepository<Table>();
         }
 
+        public Table Get(int tableId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         /// <summary>
         /// Get a list of all Poker Tables in the repository
         /// </summary>

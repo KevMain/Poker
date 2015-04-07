@@ -6,6 +6,8 @@ namespace CompatibleSoftware.Poker.Ports.Services
 {
     public interface IPlayerService
     {
+        Player Get(int playerId);
+ 
         IList<Player> GetAllCurrentPlayers();
 
         Player CreatePlayer(CreatePlayerCommand createPlayerCommand);

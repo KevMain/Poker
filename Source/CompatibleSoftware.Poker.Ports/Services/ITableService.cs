@@ -10,6 +10,8 @@ namespace CompatibleSoftware.Poker.Ports.Services
 
         Table CreateTable(CreateTableCommand createTableCommand);
 
+        JoinRequest JoinTable(JoinTableCommand joinTableCommand);
+
         IList<Player> GetTablePlayers(int tableId);
     }
 }
