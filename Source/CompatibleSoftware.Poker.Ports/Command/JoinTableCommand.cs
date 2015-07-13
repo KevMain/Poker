@@ -1,6 +1,6 @@
 ﻿namespace CompatibleSoftware.Poker.Ports.Command
 {
-    public class JoinTableCommand
+    public class JoinTableCommand : ICommand
     {
         public int TableId { get; set; }
         

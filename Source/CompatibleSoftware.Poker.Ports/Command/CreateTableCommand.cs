@@ -1,6 +1,6 @@
 ﻿namespace CompatibleSoftware.Poker.Ports.Command
 {
-    public class CreateTableCommand
+    public class CreateTableCommand : ICommand
     {
         public string Name { get; set; }
         

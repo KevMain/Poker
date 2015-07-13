@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using CompatibleSoftware.Poker.Domain.Models;
 using CompatibleSoftware.Poker.Ports.Command;
+using CompatibleSoftware.Poker.Ports.Handlers;
 using CompatibleSoftware.Poker.Ports.Repositories;
-using Player = CompatibleSoftware.Poker.Domain.Models.Player;
 
 namespace CompatibleSoftware.Poker.Ports.Services
 {
@@ -73,7 +73,12 @@ namespace CompatibleSoftware.Poker.Ports.Services
                 RequestStatus = JoinStatus.InProgress
             };
 
-            return _joinRequestRepository.Create(joinRequest);
+            joinRequest = _joinRequestRepository.Create(joinRequest);
+
+            var joinTableHandler = new JoinTableHandler(joinTableCommand);
+            joinTableHandler.Execute();
+
+            return joinRequest;
         }
 
         public IList<Player> GetTablePlayers(int tableId)

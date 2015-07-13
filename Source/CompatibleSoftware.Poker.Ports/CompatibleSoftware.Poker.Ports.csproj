@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\JoinTableCommand.cs" />
     <Compile Include="Command\CreateTableCommand.cs" />
     <Compile Include="Command\CreatePlayerCommand.cs" />
+    <Compile Include="Handlers\IHandler.cs" />
+    <Compile Include="Handlers\BaseHandler.cs" />
+    <Compile Include="Handlers\JoinTableHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IPlayerRepository.cs" />
     <Compile Include="Repositories\IJoinRequestRepository.cs" />
